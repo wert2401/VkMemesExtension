@@ -1,0 +1,69 @@
+#vkMemesMenuBtn {
+    box-sizing: border-box;
+    flex: 0 0 100px;
+    height: 100px;
+    margin-right: 3px;
+    display: inline-block;
+    background-color: rgb(77, 77, 77);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    transition: all 0.07s ease-in;
+}
+
+#vkMemesMenuBtn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 5px rgb(172, 172, 172);
+}
+
+.vkMemesWrap {
+    box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 140px;
+    width: 100%;
+    top: -145px;
+    border: 1px solid #d0cbe7;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    cursor: initial;
+}
+
+.vkMemesClosePanel {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #d1d9e0;
+    margin-bottom: 5px;
+}
+
+.vkMemesCloseLabel {
+    box-sizing: border-box;
+    margin: 3px;
+    display: block;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.vkMemesMenu {
+    box-sizing: border-box;
+    display: flex;
+    height: 130px;
+    width: 100%;
+    flex-direction: row;
+    overflow: scroll;
+    overflow-y: hidden;
+    padding: 0 5px;
+}
+
+.vkMemesMenu::-webkit-scrollbar {
+    height: 7px;
+    background-color: #fff;
+}
+
+.vkMemesMenu::-webkit-scrollbar-thumb {
+    background-color: #5181b8;
+}
