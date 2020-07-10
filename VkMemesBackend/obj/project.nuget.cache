@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WDSH9THOAPJSpUNC9Z/G797up9YtpW+zCIfLznHrCZexshwoXI4KEdPfTgeT9TDCT0HEPpW/QmbaHK3pkFdn7g==",
+  "dgSpecHash": "MxMIVt8paGxrF+6smqosnzbEZqh2AyeMPAFAtFWKzRpyYyP+ZpK800vyQS5AfvItYBPvZc0CyWF6iBitGGqdTA==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\VkMemesExtension\\VkMemesExtension\\VkMemesExtension.csproj",
+  "projectFilePath": "D:\\Projects\\VkMemesExtension\\VkMemesBackend\\VkMemesBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ilyaf\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
   ],

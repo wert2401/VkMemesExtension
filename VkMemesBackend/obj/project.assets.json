@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\VkMemesExtension\\VkMemesExtension\\VkMemesExtension.csproj",
-      "projectName": "VkMemesExtension",
-      "projectPath": "D:\\Projects\\VkMemesExtension\\VkMemesExtension\\VkMemesExtension.csproj",
+      "projectUniqueName": "D:\\Projects\\VkMemesExtension\\VkMemesBackend\\VkMemesBackend.csproj",
+      "projectName": "VkMemesBackend",
+      "projectPath": "D:\\Projects\\VkMemesExtension\\VkMemesBackend\\VkMemesBackend.csproj",
       "packagesPath": "C:\\Users\\ilyaf\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\VkMemesExtension\\VkMemesExtension\\obj\\",
+      "outputPath": "D:\\Projects\\VkMemesExtension\\VkMemesBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ilyaf\\AppData\\Roaming\\NuGet\\NuGet.Config",
