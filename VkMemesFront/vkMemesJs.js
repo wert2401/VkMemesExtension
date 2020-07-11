@@ -3,7 +3,8 @@ const MenuBtnId = "vkMemesMenuBtn";
 const obsConfig = {
     attributes: true,
     childList: true,
-    subtree: true
+    subtree: true,
+    characterData: true
 };
 
 let img = "https://meduza.io/image/attachments/images/002/526/218/large/9rhaxT2iQ0LrWFYJAh_aBA.jpg";
@@ -11,17 +12,23 @@ let buttons;
 let input;
 let attachements;
 let body = document.getElementById("page_body");
+let menuWrap;
 
 
 function ClearInput() {
     console.log("Input clear: " + img);
     let str = input.textContent;
     str = str.replace(img, "");
+    str = str.replace("!", "");
     input.textContent = str.trim();
 }
 
 function hideElement(element) {
     element.style.display = "none";
+}
+
+function showElement(element, displayStyle) {
+    element.style.display = displayStyle;
 }
 
 function CreateMemeButton(menu, img, attachements) {
@@ -43,6 +50,16 @@ const attachementCallback = function(mutationsList, observer) {
     observer.disconnect();
 };
 
+const inputCallback = function() {
+    let str = input.textContent;
+    if (str.includes("!")) {
+        //Send message on bg script and after loading memes show menu
+        showElement(menuWrap, "flex");
+    } else {
+        hideElement(menuWrap);
+    }
+};
+
 const pageCallback = function(mutationsList, observer) {
     buttons = document.getElementsByClassName("im_chat-input--buttons")[0];
     let btn = document.getElementById(MenuBtnId);
@@ -53,7 +70,7 @@ const pageCallback = function(mutationsList, observer) {
     attachements = document.getElementsByClassName("im-chat-input--scroll")[0];
 
     //Create menu
-    let menuWrap = document.createElement("div");
+    menuWrap = document.createElement("div");
     menuWrap.className = "vkMemesWrap";
     buttons.parentElement.appendChild(menuWrap);
 
@@ -73,7 +90,9 @@ const pageCallback = function(mutationsList, observer) {
     menu.className = "vkMemesMenu";
     menuWrap.appendChild(menu);
 
-    //Some event on changing input for opening menu, MutationObserver mb
+    //Event on changing input for opening menu
+    const obsInput = new MutationObserver(inputCallback);
+    obsInput.observe(input, obsConfig);
 
     //Add memes in menu
     for (i = 0; i < 10; i++) {
@@ -81,5 +100,6 @@ const pageCallback = function(mutationsList, observer) {
     }
 }
 
+//Checking if page changed and if it is now on messages
 const obsPage = new MutationObserver(pageCallback);
 obsPage.observe(body, obsConfig);
