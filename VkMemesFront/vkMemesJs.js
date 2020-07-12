@@ -7,18 +7,21 @@ const obsConfig = {
     characterData: true
 };
 
-let img = "https://meduza.io/image/attachments/images/002/526/218/large/9rhaxT2iQ0LrWFYJAh_aBA.jpg";
-let buttons;
-let input;
-let attachements;
 let body = document.getElementById("page_body");
+let input;
 let menuWrap;
+let menu;
+let attachements;
+let buttons;
+
+let imgMeme;
 
 
 function ClearInput() {
-    console.log("Input clear: " + img);
+    console.log("Input clear: " + imgMeme);
     let str = input.textContent;
-    str = str.replace(img, "");
+    str = str.replace(imgMeme, "");
+    str = str.replace(str.split("!")[1], "");
     str = str.replace("!", "");
     input.textContent = str.trim();
 }
@@ -31,36 +34,54 @@ function showElement(element, displayStyle) {
     element.style.display = displayStyle;
 }
 
-function CreateMemeButton(menu, img, attachements) {
+function CreateMemeButton(img) {
     let menuBtn = document.createElement("label");
     menuBtn.id = MenuBtnId;
     menuBtn.style.backgroundImage = "url(" + img + ")";
-    menu.appendChild(menuBtn);
-    const obsAttach = new MutationObserver(attachementCallback);
-
     menuBtn.addEventListener("click", function() {
         input.textContent += " " + img;
-        input.focus()
+        input.focus();
+        imgMeme = img;
+        const obsAttach = new MutationObserver(attachementChangeCallback);
         obsAttach.observe(attachements, obsConfig);
-    })
+    });
+
+    menu.appendChild(menuBtn);
 }
 
-const attachementCallback = function(mutationsList, observer) {
+function CleanMenu() {
+    menu.innerHTML = "";
+}
+
+const attachementChangeCallback = function(mustationList, observer) {
     ClearInput();
     observer.disconnect();
 };
 
-const inputCallback = function() {
+const inputChangeCallback = function() {
+    console.log("Input changed");
     let str = input.textContent;
     if (str.includes("!")) {
-        //Send message on bg script and after loading memes show menu
-        showElement(menuWrap, "flex");
+        memeTag = str.split("!")[1];
+        if (memeTag != "") {
+            chrome.runtime.sendMessage({ tag: memeTag }, response => {
+                console.log("Response from server");
+                CleanMenu();
+                for (let i = 0; i < response.memesList.length; i++) {
+                    const meme = response.memesList[i];
+                    CreateMemeButton(meme.imageSource);
+                }
+                showElement(menuWrap, "flex");
+            });
+        } else {
+            console.log("There are no symbols after !");
+        }
     } else {
         hideElement(menuWrap);
     }
 };
 
-const pageCallback = function(mutationsList, observer) {
+const pageChangedCallback = function() {
     buttons = document.getElementsByClassName("im_chat-input--buttons")[0];
     let btn = document.getElementById(MenuBtnId);
 
@@ -86,20 +107,17 @@ const pageCallback = function(mutationsList, observer) {
     })
     closePanel.appendChild(labelClose);
 
-    let menu = document.createElement("div");
+    menu = document.createElement("div");
     menu.className = "vkMemesMenu";
     menuWrap.appendChild(menu);
 
     //Event on changing input for opening menu
-    const obsInput = new MutationObserver(inputCallback);
+    const obsInput = new MutationObserver(inputChangeCallback);
     obsInput.observe(input, obsConfig);
 
-    //Add memes in menu
-    for (i = 0; i < 10; i++) {
-        CreateMemeButton(menu, img, attachements);
-    }
+    CreateMemeButton("https://sun1-14.userapi.com/c856016/v856016030/24aaaf/w9KelYIAdqw.jpg");
 }
 
 //Checking if page changed and if it is now on messages
-const obsPage = new MutationObserver(pageCallback);
+const obsPage = new MutationObserver(pageChangedCallback);
 obsPage.observe(body, obsConfig);
