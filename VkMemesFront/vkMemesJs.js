@@ -1,4 +1,5 @@
 const MenuBtnId = "vkMemesMenuBtn";
+const ErrorImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRALb0GFZBEAJQ-OMQ5tv-v5icl3YtKbW6aYg&usqp=CAU";
 
 const obsConfig = {
     attributes: true,
@@ -15,14 +16,12 @@ let attachements;
 let buttons;
 
 let imgMeme;
+let timerId;
 
-
-function ClearInput() {
-    console.log("Input clear: " + imgMeme);
+function сlearInput() {
     let str = input.textContent;
-    str = str.replace(imgMeme, "");
-    str = str.replace(str.split("!")[1], "");
-    str = str.replace("!", "");
+    strToRemove = str.split("!")[1].trim();
+    str = str.replace("!" + strToRemove, "");
     input.textContent = str.trim();
 }
 
@@ -34,7 +33,7 @@ function showElement(element, displayStyle) {
     element.style.display = displayStyle;
 }
 
-function CreateMemeButton(img) {
+function сreateMemeButton(img) {
     let menuBtn = document.createElement("label");
     menuBtn.id = MenuBtnId;
     menuBtn.style.backgroundImage = "url(" + img + ")";
@@ -53,28 +52,43 @@ function CleanMenu() {
     menu.innerHTML = "";
 }
 
-const attachementChangeCallback = function(mustationList, observer) {
-    ClearInput();
+const attachementChangeCallback = function(mutationList, observer) {
+    сlearInput();
+    hideElement(menuWrap);
     observer.disconnect();
 };
 
-const inputChangeCallback = function() {
+//Need to refactor
+const inputChangeCallback = function(mutationList, observer) {
     console.log("Input changed");
     let str = input.textContent;
+    if (str.includes("https://")) return;
     if (str.includes("!")) {
         memeTag = str.split("!")[1];
-        if (memeTag != "") {
-            chrome.runtime.sendMessage({ tag: memeTag }, response => {
-                console.log("Response from server");
-                CleanMenu();
-                for (let i = 0; i < response.memesList.length; i++) {
-                    const meme = response.memesList[i];
-                    CreateMemeButton(meme.imageSource);
-                }
-                showElement(menuWrap, "flex");
-            });
-        } else {
-            console.log("There are no symbols after !");
+        if (memeTag != "" && memeTag != undefined) {
+            if (timerId != null) {
+                console.log("Clear timer");
+                clearTimeout(timerId);
+            }
+            console.log("Set timer");
+            timerId = setTimeout(() => {
+                str = input.textContent;
+                memeTag = str.split("!")[1].trim();
+                console.log(memeTag);
+                chrome.runtime.sendMessage({ tag: memeTag }, response => {
+                    console.log(response);
+                    CleanMenu();
+                    if (response.memeList.length > 0) {
+                        for (let i = 0; i < response.memeList.length; i++) {
+                            const meme = response.memeList[i];
+                            сreateMemeButton(meme.imageSource);
+                        }
+                    } else {
+                        сreateMemeButton(ErrorImage);
+                    }
+                    showElement(menuWrap, "flex");
+                });
+            }, 2000);
         }
     } else {
         hideElement(menuWrap);
@@ -115,7 +129,8 @@ const pageChangedCallback = function() {
     const obsInput = new MutationObserver(inputChangeCallback);
     obsInput.observe(input, obsConfig);
 
-    CreateMemeButton("https://sun1-14.userapi.com/c856016/v856016030/24aaaf/w9KelYIAdqw.jpg");
+    сreateMemeButton(ErrorImage);
+    hideElement(menuWrap);
 }
 
 //Checking if page changed and if it is now on messages

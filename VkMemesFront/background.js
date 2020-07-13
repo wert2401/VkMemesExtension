@@ -1,20 +1,9 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.tag != null) {
-        //Make request to a server
-        sendResponse({
-            memesList: [{
-                    imageSource: "https://meduza.io/image/attachments/images/002/526/884/large/a9jobmDDvAwNrWr8DzVdOg.jpg",
-                    tags: ["dog", "meme"]
-                },
-                {
-                    imageSource: "https://meduza.io/image/attachments/images/002/526/218/large/9rhaxT2iQ0LrWFYJAh_aBA.jpg",
-                    tags: ["dog", "meme"]
-                },
-                {
-                    imageSource: "https://pbs.twimg.com/media/DogSMPSXUAYHDx4.jpg",
-                    tags: ["dog", "meme"]
-                }
-            ]
-        });
+    if (request.tag != null || request.tag != "") {
+        fetch("https://localhost:5001/api/memes/" + request.tag)
+            .then(response => response.json())
+            .then(json => sendResponse({ memeList: json }))
+            .catch(error => sendResponse({ error: error }));
+        return true;
     }
 });

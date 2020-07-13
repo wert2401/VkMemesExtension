@@ -2,6 +2,7 @@
     "name": "VkMemes",
     "version": "0.0.1",
     "description": "This extensions helps you to use your favorite memes easier",
+    "permissions": ["https://localhost:5001/*"],
     "content_scripts": [{
         "matches": ["https://vk.com/*"],
         "js": ["vkMemesJs.js"],
