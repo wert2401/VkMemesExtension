@@ -53,49 +53,47 @@ function CleanMenu() {
 }
 
 const attachementChangeCallback = function(mutationList, observer) {
-    сlearInput();
     hideElement(menuWrap);
+    сlearInput();
     observer.disconnect();
 };
 
 //Need to refactor
 const inputChangeCallback = function(mutationList, observer) {
-    console.log("Input changed");
     let str = input.textContent;
     if (str.includes("https://")) return;
     if (str.includes("!")) {
-        memeTag = str.split("!")[1];
-        if (memeTag != "" && memeTag != undefined) {
-            if (timerId != null) {
-                console.log("Clear timer");
-                clearTimeout(timerId);
-            }
-            console.log("Set timer");
-            timerId = setTimeout(() => {
-                str = input.textContent;
-                memeTag = str.split("!")[1].trim();
-                console.log(memeTag);
+        if (timerId != null) {
+            clearTimeout(timerId);
+        }
+        timerId = setTimeout(() => {
+            str = input.textContent;
+            memeTag = str.split("!")[1].trim();
+            if (memeTag != undefined && memeTag != "") {
                 chrome.runtime.sendMessage({ tag: memeTag }, response => {
-                    console.log(response);
                     CleanMenu();
-                    if (response.memeList.length > 0) {
-                        for (let i = 0; i < response.memeList.length; i++) {
-                            const meme = response.memeList[i];
-                            сreateMemeButton(meme.imageSource);
+                    if (response.memeList) {
+                        if (response.memeList.length > 0) {
+                            for (let i = 0; i < response.memeList.length; i++) {
+                                const meme = response.memeList[i];
+                                сreateMemeButton(meme.imageSource);
+                            }
+                        } else {
+                            сreateMemeButton(ErrorImage);
                         }
                     } else {
                         сreateMemeButton(ErrorImage);
+                        console.warn("VKMemesExtension: " + response.error);
                     }
                     showElement(menuWrap, "flex");
                 });
-            }, 2000);
-        }
-    } else {
-        hideElement(menuWrap);
+            }
+        }, 2000);
     }
-};
+}
 
-const pageChangedCallback = function() {
+
+const pageChangedCallback = function(mutationList, observer) {
     buttons = document.getElementsByClassName("im_chat-input--buttons")[0];
     let btn = document.getElementById(MenuBtnId);
 

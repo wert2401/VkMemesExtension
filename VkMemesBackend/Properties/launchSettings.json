@@ -20,7 +20,7 @@
     "VkMemesExtension": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/memes/dog",
+      "launchUrl": "api/memes/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

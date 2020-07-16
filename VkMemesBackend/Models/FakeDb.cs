@@ -16,14 +16,15 @@ namespace VkMemesBackend.Models
             memes = new List<MemeModel>();
             for (int i = 0; i < 10; i++)
             {
-                memes.Add(new MemeModel(rndImgs[rnd.Next(0, rndImgs.Length)], new List<string> { rndTags[rnd.Next(0, rndTags.Length)] }));
+                MemeModel meme = new MemeModel { ImageSource = rndImgs[rnd.Next(0, rndImgs.Length)], Tag = rndTags[rnd.Next(0, rndTags.Length)] };
+                memes.Add(meme);
             }
         }
 
         public List<MemeModel> GetMemes(string tag)
         {
             List<MemeModel> search = new List<MemeModel>();
-            search = memes.Where(meme => meme.Tags.Contains(tag)).ToList();
+            search = memes.Where(meme => meme.Tag.Contains(tag)).ToList();
             return search;
         }
     }

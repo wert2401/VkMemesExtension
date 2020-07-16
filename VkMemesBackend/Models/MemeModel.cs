@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace VkMemesBackend.Models
 {
     public class MemeModel
     {
-        public string ImageSource { get; set; }
-        public List<string> Tags { get; set; }
-
-        public MemeModel(string Image, List<string> Tags)
-        {
-            ImageSource = Image;
-            this.Tags = new List<string>();
-            this.Tags.AddRange(Tags);
-        }
+        public int Id { get; set; }
+        [Url]
+        public string ImageSource { get; set; } = "";
+        [Required]
+        public string Tag { get; set; } = "";
+        public int Rating { get; set; } = 0;
     }
 }

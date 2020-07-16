@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VkMemesPopup</title>
+    <style>
+        * {
+            color: #2a5885;
+            margin: 0;
+            padding: 0;
+            font-size: 15px;
+        }
+        
+        form {
+            margin: 10px;
+        }
+        
+        form input {
+            padding: 3px;
+        }
+        
+        .head {
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #dfe6ed;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 5px;
+        }
+        
+        .field {
+            margin: 5px 0;
+        }
+        
+        .field input {
+            margin-top: 4px;
+        }
+        
+        .submit_btn {
+            width: 100%;
+            padding: 3px;
+            font-weight: bold;
+            background-color: #d1d9e0;
+            border: none;
+            border-radius: 2px;
+        }
+        
+        .submit_btn:hover {
+            background-color: #abbbc9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head">Добавление нового мема</div>
+    <form action="https://localhost:5001/api/memes/create" method="POST" target="_blank">
+        <div class="field">
+            <div>Ссылка на картинку: <input name="ImageSource" type="text"></div>
+        </div>
+        <div class="field">
+            <div>Тэги для поиска(через запятую): <input name="Tag" type="text"></div>
+        </div>
+        <input type="submit" value="Добавить" class="submit_btn">
+    </form>
+</body>
+
+</html>

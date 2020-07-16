@@ -12,19 +12,55 @@ using VkMemesBackend.Models;
 namespace VkMemesBackend.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/{tag}")]
+    [Route("api/[controller]")]
     public class MemesController : ControllerBase
     {
-        FakeDb fakeDb;
-        public MemesController(ILogger<MemesController> logger)
+        MemesDatabaseContext context;
+        public MemesController(MemesDatabaseContext context)
         {
-            fakeDb = new FakeDb();
+            this.context = context;
         }
 
+        [HttpGet]
+        public List<MemeModel> GetMemes()
+        {
+            List<MemeModel> memes = context.Memes.ToList();
+            return memes;
+        }
+
+        [HttpGet("{tag}")]
         public List<MemeModel> GetMemeByTag(string tag)
         {
-            List<MemeModel> memes = fakeDb.GetMemes(tag);
+            Console.WriteLine("Поиск мема по тэгу '" + tag + "'");
+            List<MemeModel> memes = context.Memes.Where(meme => meme.Tag.Contains(tag)).ToList();
             return memes;
+        }
+
+        [Route("create")]
+        [HttpPost]
+        public string CreateMeme([FromForm]MemeModel meme)
+        {
+            if (ModelState.IsValid)
+            {
+                List<MemeModel> foundMemes = context.Memes.Where(m => m.ImageSource == meme.ImageSource).ToList();
+                if (foundMemes.Count > 0)
+                {
+                    if (!foundMemes[0].Tag.Contains(meme.Tag))
+                    {
+                        foundMemes[0].Tag += meme.Tag;
+                    }
+                }
+                else
+                {
+                    context.Memes.Add(meme);
+                }
+                context.SaveChanges();
+                return "Ну добавил и добавил мем, что бухтеть то";
+            }
+            else
+            {
+                return "Мем не добавлен, введите корректные значения для ссылки и тэгов";
+            }
         }
     }
 }
