@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VxizD/oRTMrD3Oxmr8uP4M0V7NVG5uxg/rHv0oUaueAps4/nF8vBi5apYTT4QylOk9Cm4iVzp/2C9y/SujDCGg==",
+  "dgSpecHash": "7/ILHxmnYkVI/65FU0hgI6VHwvS2Jr2DA/jzNb2FjKxZevvA2ye/6AmVBcKZ3+ioEqglRuUCti5qRSLAsJD+YQ==",
   "success": true,
   "projectFilePath": "D:\\Projects\\VkMemesExtension\\VkMemesBackend\\VkMemesBackend.csproj",
   "expectedPackageFiles": [
@@ -29,6 +29,7 @@
     "C:\\Users\\ilyaf\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.6\\microsoft.extensions.logging.abstractions.3.1.6.nupkg.sha512",
     "C:\\Users\\ilyaf\\.nuget\\packages\\microsoft.extensions.options\\3.1.6\\microsoft.extensions.options.3.1.6.nupkg.sha512",
     "C:\\Users\\ilyaf\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.6\\microsoft.extensions.primitives.3.1.6.nupkg.sha512",
+    "C:\\Users\\ilyaf\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\ilyaf\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.2\\sqlitepclraw.bundle_e_sqlite3.2.0.2.nupkg.sha512",
     "C:\\Users\\ilyaf\\.nuget\\packages\\sqlitepclraw.core\\2.0.2\\sqlitepclraw.core.2.0.2.nupkg.sha512",
     "C:\\Users\\ilyaf\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.2\\sqlitepclraw.lib.e_sqlite3.2.0.2.nupkg.sha512",

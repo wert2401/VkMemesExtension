@@ -28,6 +28,7 @@ namespace VkMemesBackend.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Tag")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
