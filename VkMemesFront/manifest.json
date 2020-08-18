@@ -2,7 +2,7 @@
     "name": "VkMemes",
     "version": "0.0.1",
     "description": "This extensions helps you to use your favorite memes easier",
-    "permissions": ["declarativeContent", "https://localhost:5001/*"],
+    "permissions": ["declarativeContent", "http://84.201.179.54:8080/*"],
     "page_action": {
         "default_popup": "./Popup/popup.html"
     },

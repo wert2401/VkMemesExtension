@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7/ILHxmnYkVI/65FU0hgI6VHwvS2Jr2DA/jzNb2FjKxZevvA2ye/6AmVBcKZ3+ioEqglRuUCti5qRSLAsJD+YQ==",
+  "dgSpecHash": "rrQwdMewB3dscS5o01HZlJW2OaO5brY87vsCsvGekemk6BoXmsZTbnABvWZjP8hzrVpEsQnMQnp5bM45+SJmfw==",
   "success": true,
   "projectFilePath": "D:\\Projects\\VkMemesExtension\\VkMemesBackend\\VkMemesBackend.csproj",
   "expectedPackageFiles": [
@@ -38,8 +38,7 @@
     "C:\\Users\\ilyaf\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\ilyaf\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512",
     "C:\\Users\\ilyaf\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
-    "C:\\Users\\ilyaf\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
-    "C:\\Users\\ilyaf\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\ilyaf\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
   ],
   "logs": []
 }

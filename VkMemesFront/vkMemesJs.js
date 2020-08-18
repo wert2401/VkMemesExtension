@@ -68,7 +68,7 @@ const inputChangeCallback = function(mutationList, observer) {
         }
         timerId = setTimeout(() => {
             str = input.textContent;
-            memeTag = str.split("!")[1].trim();
+            memeTag = str.split("!")[1]?.trim();
             if (memeTag != undefined && memeTag != "") {
                 chrome.runtime.sendMessage({ tag: memeTag }, response => {
                     CleanMenu();
@@ -89,6 +89,9 @@ const inputChangeCallback = function(mutationList, observer) {
                 });
             }
         }, 2000);
+    }
+    else {
+        hideElement(menuWrap);
     }
 }
 
